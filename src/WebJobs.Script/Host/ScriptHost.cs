@@ -1175,7 +1175,9 @@ namespace Microsoft.Azure.WebJobs.Script
                 _restartEvent.Dispose();
                 (TraceWriter as IDisposable)?.Dispose();
 
+#if FEATURE_NODE
                 NodeFunctionInvoker.UnhandledException -= OnUnhandledException;
+#endif
             }
         }
     }
