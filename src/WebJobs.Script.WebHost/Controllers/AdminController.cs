@@ -94,7 +94,8 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost.Controllers
             HostStatus status = new HostStatus
             {
                 Id = _scriptHostManager.Instance?.ScriptConfig.HostConfig.HostId,
-                WebHostSettings = _webHostSettings,
+                // Only return WebHostSettings if running locally as it's not useful otherwise.
+                WebHostSettings = _webHostSettings?.IsSelfHost == true ? _webHostSettings : null,
                 ProcessId = Process.GetCurrentProcess().Id,
                 IsDebuggerAttached = Debugger.IsAttached
             };

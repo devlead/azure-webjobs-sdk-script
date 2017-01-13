@@ -1,6 +1,7 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Runtime.Serialization;
 using Microsoft.Azure.WebJobs.Host;
 using Newtonsoft.Json;
 
@@ -20,10 +21,8 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
         [JsonProperty("secretsPath")]
         public string SecretsPath { get; set; }
 
-        [JsonProperty("nodeDebugPort")]
-        public int NodeDebugPort { get; set; }
-
         [JsonIgnore]
+        [IgnoreDataMember]
         public TraceWriter TraceWriter { get; set; }
     }
 }
