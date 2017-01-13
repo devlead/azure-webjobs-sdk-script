@@ -111,13 +111,21 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost.Controllers
 
         [HttpPost]
         [Route("admin/host/debug")]
-        public bool LaunchDebugger()
+        public HttpResponseMessage LaunchDebugger()
         {
             if (_webHostSettings.IsSelfHost)
             {
-                return Debugger.Launch();
+                // If debugger is already running, this will be a no-op returning true.
+                if (Debugger.Launch())
+                {
+                    return new HttpResponseMessage(HttpStatusCode.Created);
+                }
+                else
+                {
+                    return new HttpResponseMessage(HttpStatusCode.Conflict);
+                }
             }
-            return false;
+            return new HttpResponseMessage(HttpStatusCode.NotImplemented);
         }
 
         public override Task<HttpResponseMessage> ExecuteAsync(HttpControllerContext controllerContext, CancellationToken cancellationToken)

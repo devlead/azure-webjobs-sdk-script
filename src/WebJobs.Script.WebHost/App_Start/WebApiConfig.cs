@@ -40,7 +40,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 
             var builder = new ContainerBuilder();
             builder.RegisterApiControllers(typeof(FunctionsController).Assembly);
-            AutofacBootstrap.Initialize(settingsManager, builder, settings, config);
+            AutofacBootstrap.Initialize(settingsManager, builder, settings);
 
             // Invoke registration callback
             dependencyCallback?.Invoke(builder, settings);

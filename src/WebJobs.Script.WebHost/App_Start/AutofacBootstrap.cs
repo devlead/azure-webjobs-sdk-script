@@ -12,7 +12,7 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
 {
     public static class AutofacBootstrap
     {
-        internal static void Initialize(ScriptSettingsManager settingsManager, ContainerBuilder builder, WebHostSettings settings, HttpConfiguration config)
+        internal static void Initialize(ScriptSettingsManager settingsManager, ContainerBuilder builder, WebHostSettings settings)
         {
             builder.RegisterInstance(settingsManager);
 
@@ -26,7 +26,6 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
             builder.Register<WebScriptHostManager>(ct => ct.Resolve<WebHostResolver>().GetWebScriptHostManager(settings)).ExternallyOwned();
             builder.Register<WebHookReceiverManager>(ct => ct.Resolve<WebHostResolver>().GetWebHookReceiverManager(settings)).ExternallyOwned();
             builder.RegisterInstance(settings);
-            builder.RegisterHttpRequestMessage(config);
         }
     }
 }
