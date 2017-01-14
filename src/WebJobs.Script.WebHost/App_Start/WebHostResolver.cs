@@ -171,7 +171,6 @@ namespace Microsoft.Azure.WebJobs.Script.WebHost
             return scriptHostConfig;
         }
 
-
         private static void InitializeFileSystem(string scriptPath)
         {
             if (ScriptSettingsManager.Instance.IsAzureEnvironment)
